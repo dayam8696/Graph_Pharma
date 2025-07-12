@@ -70,12 +70,18 @@ const BodyWeightGraph = () => {
   ];
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <button 
+    <div
+      style={{
+        textAlign: 'center',
+        marginTop: '20px',
+        padding: '10px',
+      }}
+    >
+      <button
         onClick={handleDownload}
         style={{
-          padding: '10px 20px',
-          fontSize: '16px',
+          padding: '10px 16px',
+          fontSize: '14px',
           fontWeight: 'bold',
           backgroundColor: '#ff9500',
           color: 'white',
@@ -91,22 +97,23 @@ const BodyWeightGraph = () => {
       <div
         ref={chartRef}
         style={{
-          width: '80%',
-          maxWidth: '900px',
-          height: '650px',
-          padding: '20px',
+          width: '100%',
+          maxWidth: '1000px',
+          height: '80vh',
+          padding: '10px',
           margin: '0 auto',
           backgroundColor: '#f9f9f9',
           borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          overflowX: 'auto' // for smaller screens
         }}
       >
         <h2
           style={{
-            fontSize: '24px',
+            fontSize: '22px',
             fontWeight: 'bold',
             textAlign: 'center',
-            marginBottom: '30px'
+            marginBottom: '20px'
           }}
         >
           Body Weight (g)
@@ -116,24 +123,24 @@ const BodyWeightGraph = () => {
             data={data}
             margin={{
               top: 30,
-              right: 100,
-              left: 60,
-              bottom: 60,
+              right: 50,
+              left: 20,
+              bottom: 50,
             }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 14, fontWeight: 'bold' }}
-              axisLine={{ stroke: '#333', strokeWidth: 2 }}
-              tickLine={{ stroke: '#333', strokeWidth: 2 }}
+              tick={{ fontSize: 12, fontWeight: 'bold' }}
+              axisLine={{ stroke: '#333', strokeWidth: 1.5 }}
+              tickLine={{ stroke: '#333', strokeWidth: 1.5 }}
               label={{
                 value: 'Time',
                 position: 'insideBottom',
                 offset: -10,
                 style: {
                   textAnchor: 'middle',
-                  fontSize: '16px',
+                  fontSize: '14px',
                   fontWeight: 'bold'
                 }
               }}
@@ -145,13 +152,13 @@ const BodyWeightGraph = () => {
                 position: 'insideLeft',
                 style: {
                   textAnchor: 'middle',
-                  fontSize: '16px',
+                  fontSize: '14px',
                   fontWeight: 'bold'
                 }
               }}
-              tick={{ fontSize: 14, fontWeight: 'bold' }}
-              axisLine={{ stroke: '#333', strokeWidth: 2 }}
-              tickLine={{ stroke: '#333', strokeWidth: 2 }}
+              tick={{ fontSize: 12, fontWeight: 'bold' }}
+              axisLine={{ stroke: '#333', strokeWidth: 1.5 }}
+              tickLine={{ stroke: '#333', strokeWidth: 1.5 }}
               domain={[80, 220]}
             />
             <Tooltip
@@ -159,75 +166,28 @@ const BodyWeightGraph = () => {
                 backgroundColor: 'white',
                 border: '2px solid #ccc',
                 borderRadius: '6px',
-                fontSize: '14px',
+                fontSize: '13px',
                 padding: '10px'
               }}
             />
             <Legend
               wrapperStyle={{
-                paddingTop: '30px',
-                fontSize: '14px',
-                fontWeight: 'bold'
+                paddingTop: '10px',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                flexWrap: 'wrap'
               }}
               iconType="line"
             />
 
-            <Line
-              type="monotone"
-              dataKey="Normal Control"
-              stroke="#ff9500"
-              strokeWidth={4}
-              dot={{ fill: '#ff9500', strokeWidth: 2, r: 6 }}
-              name="NORMAL"
-            />
-            <Line
-              type="monotone"
-              dataKey="Diabetic Control"
-              stroke="#e60026"
-              strokeWidth={4}
-              dot={{ fill: '#e60026', strokeWidth: 2, r: 6 }}
-              name="DIABETIC"
-            />
-            <Line
-              type="monotone"
-              dataKey="DIA+ERT(5)"
-              stroke="#b8218a"
-              strokeWidth={4}
-              dot={{ fill: '#b8218a', strokeWidth: 2, r: 6 }}
-              name="DIA+ERT(5)"
-            />
-            <Line
-              type="monotone"
-              dataKey="DIA+ERT(10)"
-              stroke="#d47bb3"
-              strokeWidth={4}
-              dot={{ fill: '#d47bb3', strokeWidth: 2, r: 6 }}
-              name="DIA+ERT(10)"
-            />
-            <Line
-              type="monotone"
-              dataKey="DIA+UMB(40)"
-              stroke="#1e90ff"
-              strokeWidth={4}
-              dot={{ fill: '#1e90ff', strokeWidth: 2, r: 6 }}
-              name="DIA+UMB(40)"
-            />
-            <Line
-              type="monotone"
-              dataKey="DIA+ERT(5)+MET(200)"
-              stroke="#00bfff"
-              strokeWidth={4}
-              dot={{ fill: '#00bfff', strokeWidth: 2, r: 6 }}
-              name="DIA+ERT(5)+MET(200)"
-            />
-            <Line
-              type="monotone"
-              dataKey="DIA+ERT(5)+MET(200)+UMB(20)"
-              stroke="#333333"
-              strokeWidth={4}
-              dot={{ fill: '#333333', strokeWidth: 2, r: 6 }}
-              name="DIA+ERT(5)+MET(200)+UMB(20)"
-            />
+            {/* All Line Series */}
+            <Line type="monotone" dataKey="Normal Control" stroke="#ff9500" strokeWidth={3} dot={{ fill: '#ff9500', r: 4 }} name="NORMAL" />
+            <Line type="monotone" dataKey="Diabetic Control" stroke="#e60026" strokeWidth={3} dot={{ fill: '#e60026', r: 4 }} name="DIABETIC" />
+            <Line type="monotone" dataKey="DIA+ERT(5)" stroke="#b8218a" strokeWidth={3} dot={{ fill: '#b8218a', r: 4 }} />
+            <Line type="monotone" dataKey="DIA+ERT(10)" stroke="#d47bb3" strokeWidth={3} dot={{ fill: '#d47bb3', r: 4 }} />
+            <Line type="monotone" dataKey="DIA+UMB(40)" stroke="#1e90ff" strokeWidth={3} dot={{ fill: '#1e90ff', r: 4 }} />
+            <Line type="monotone" dataKey="DIA+ERT(5)+MET(200)" stroke="#00bfff" strokeWidth={3} dot={{ fill: '#00bfff', r: 4 }} />
+            <Line type="monotone" dataKey="DIA+ERT(5)+MET(200)+UMB(20)" stroke="#333333" strokeWidth={3} dot={{ fill: '#333333', r: 4 }} />
           </LineChart>
         </ResponsiveContainer>
       </div>
